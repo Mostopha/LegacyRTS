@@ -11,11 +11,26 @@ public class clickToMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cam = Camera.main;
-        navMeshAgent = GetComponent<NavMeshAgent>();
-	}
+
+
+        //navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = null;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                navMeshAgent.SetDestination(hit.point);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -24,7 +39,10 @@ public class clickToMove : MonoBehaviour {
 
             if(Physics.Raycast(ray, out hit))
             {
-                navMeshAgent.SetDestination(hit.point);
+                if (hit.collider.tag == "Player")
+                {
+                    navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
+                }
             }
         }
 	}
