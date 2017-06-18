@@ -98,7 +98,20 @@ public class newListSelectionScript : MonoBehaviour {
 
 
                 }
+                else
+                {
+                    ClearList();
+                   navMeshList.Clear();
+                }
             }
+        }
+    }
+
+    void ClearList()
+    {
+        for (int i = 0; i < navMeshList.Count; i++)
+        {
+            navMeshList[i].gameObject.tag = "Player";
         }
     }
 }
