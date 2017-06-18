@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class newSelectionScript : MonoBehaviour {
+public class newListSelectionScript : MonoBehaviour {
 
     public Camera cam;
     public NavMeshAgent navMeshAgent;
@@ -11,20 +11,22 @@ public class newSelectionScript : MonoBehaviour {
 
     private NavMeshAgent[] navMeshArrays;
 
-    private List<NavMeshAgent> navMeshList;
+    List<NavMeshAgent> navMeshList;
 
     // Use this for initialization
     void Start()
     {
-        navMeshArrays = new NavMeshAgent[5];
+        //navMeshArrays = new NavMeshAgent[5];
 
+
+        navMeshList = new List<NavMeshAgent>();
         cam = Camera.main;
 
 
         //navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent = null;
 
-        
+
 
     }
 
@@ -41,10 +43,16 @@ public class newSelectionScript : MonoBehaviour {
             {
                 //navMeshAgent.SetDestination(hit.point);
 
-                for (int i = 0; i < navMeshArrays.Length; i++)
-                {
-                   navMeshArrays[i].SetDestination(hit.point);
-                }
+                /* for (int i = 0; i < navMeshArrays.Length; i++)
+                 {
+                     //navMeshArrays[i].SetDestination(hit.point);
+                     navMeshList[i].SetDestination(hit.point);
+                 }*/
+
+                for (int i = 0; i < navMeshList.Count; i++)
+               {
+                   navMeshList[i].SetDestination(hit.point);
+               }
             }
         }
 
@@ -65,9 +73,11 @@ public class newSelectionScript : MonoBehaviour {
                     }
 
                     hit.collider.tag = "chosen";
-                    //navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
+                    navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
 
-                    navMeshArrays[0] = hit.collider.GetComponent<NavMeshAgent>();
+                    // navMeshArrays[0] = hit.collider.GetComponent<NavMeshAgent>();
+
+                    navMeshList.Add(navMeshAgent);
 
                     previousUnit = hit.collider;
                     Debug.Log(previousUnit.name);
