@@ -11,7 +11,7 @@ public class newListSelectionScript : MonoBehaviour {
 
     private NavMeshAgent[] navMeshArrays;
 
-    List<NavMeshAgent> navMeshList;
+    public List<NavMeshAgent> navMeshList;
 
     // Use this for initialization
     void Start()
@@ -65,12 +65,25 @@ public class newListSelectionScript : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit))
             {
+            
                 if (hit.collider.tag == "Player")
                 {
-                    if (previousUnit != null)
+                    if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        previousUnit.tag = "Player";
-                        navMeshList.Clear();
+
+                    }
+                    else
+                    {
+                        if (previousUnit != null)
+                        {
+                            // previousUnit.tag = "Player";
+
+                            for (int i = 0; i < navMeshList.Count; i++)
+                            {
+                                navMeshList[i].gameObject.tag="Player";
+                            }
+                            navMeshList.Clear();
+                        }
                     }
 
                     hit.collider.tag = "chosen";
