@@ -3,26 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class clickToMove : MonoBehaviour {
+public class newSelectionScript : MonoBehaviour {
 
     public Camera cam;
     public NavMeshAgent navMeshAgent;
     private Collider previousUnit;
 
-    public NavMeshAgent[] navMeshArrays;
+    private NavMeshAgent[] navMeshArrays;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+        navMeshArrays = new NavMeshAgent[5];
+
         cam = Camera.main;
 
 
         //navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent = null;
 
+        
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -31,7 +37,12 @@ public class clickToMove : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit))
             {
-                navMeshAgent.SetDestination(hit.point);
+                //navMeshAgent.SetDestination(hit.point);
+
+                for (int i = 0; i < navMeshArrays.Length; i++)
+                {
+                   navMeshArrays[i].SetDestination(hit.point);
+                }
             }
         }
 
@@ -42,7 +53,7 @@ public class clickToMove : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.tag == "Player")
                 {
@@ -52,13 +63,16 @@ public class clickToMove : MonoBehaviour {
                     }
 
                     hit.collider.tag = "chosen";
-                    navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
+                    //navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
+
+                    navMeshArrays[0] = hit.collider.GetComponent<NavMeshAgent>();
+
                     previousUnit = hit.collider;
                     Debug.Log(previousUnit.name);
 
-                    
+
                 }
             }
         }
-	}
+    }
 }
