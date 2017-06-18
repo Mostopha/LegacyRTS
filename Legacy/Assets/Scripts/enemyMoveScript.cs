@@ -13,14 +13,14 @@ public class enemyMoveScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+       //target = GameObject.FindGameObjectWithTag("chosen").transform;
         navComponent = this.gameObject.GetComponent<NavMeshAgent>();
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float dist = Vector3.Distance(target.position, transform.position);
+        //float dist = Vector3.Distance(target.position, transform.position);
 
         if (target)
         {
@@ -31,11 +31,13 @@ public class enemyMoveScript : MonoBehaviour {
             if (target = null)
             {
                 target = this.gameObject.GetComponent<Transform>();
+                //target = GameObject.FindGameObjectWithTag("chosen").transform;
 
             }
             else
             {
-                target = GameObject.FindGameObjectWithTag("Player").transform;
+                target = GameObject.FindGameObjectWithTag("chosen").transform;
+                float dist = Vector3.Distance(target.position, transform.position);
             }
         }
     }

@@ -41,6 +41,7 @@ public class clickToMove : MonoBehaviour {
             {
                 if (hit.collider.tag == "Player")
                 {
+                    hit.collider.tag = "chosen";
                     navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
                 }
             }
