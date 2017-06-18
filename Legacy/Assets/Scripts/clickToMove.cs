@@ -7,9 +7,10 @@ public class clickToMove : MonoBehaviour {
 
     public Camera cam;
     public NavMeshAgent navMeshAgent;
+    private Collider previousUnit;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         cam = Camera.main;
 
 
@@ -34,6 +35,8 @@ public class clickToMove : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+
+            //previousUnit.tag = "Player";
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -41,8 +44,17 @@ public class clickToMove : MonoBehaviour {
             {
                 if (hit.collider.tag == "Player")
                 {
+                    if (previousUnit != null)
+                    {
+                        previousUnit.tag = "Player";
+                    }
+
                     hit.collider.tag = "chosen";
                     navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
+                    previousUnit = hit.collider;
+                    Debug.Log(previousUnit.name);
+
+                    
                 }
             }
         }

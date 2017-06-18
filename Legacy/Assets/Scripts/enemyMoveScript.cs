@@ -10,10 +10,12 @@ public class enemyMoveScript : MonoBehaviour {
     public Transform target;
     private NavMeshAgent navComponent;
 
+ 
+
     // Use this for initialization
     void Start () {
 
-       //target = GameObject.FindGameObjectWithTag("chosen").transform;
+      
         navComponent = this.gameObject.GetComponent<NavMeshAgent>();
 		
 	}
