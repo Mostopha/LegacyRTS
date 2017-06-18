@@ -70,6 +70,7 @@ public class newListSelectionScript : MonoBehaviour {
                     if (previousUnit != null)
                     {
                         previousUnit.tag = "Player";
+                        navMeshList.Clear();
                     }
 
                     hit.collider.tag = "chosen";
