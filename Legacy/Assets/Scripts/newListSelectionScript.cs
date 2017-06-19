@@ -78,11 +78,7 @@ public class newListSelectionScript : MonoBehaviour {
                         {
                             // previousUnit.tag = "Player";
 
-                            for (int i = 0; i < navMeshList.Count; i++)
-                            {
-                                navMeshList[i].gameObject.tag="Player";
-                            }
-                            navMeshList.Clear();
+                            ClearList();
                         }
                     }
 
@@ -101,7 +97,7 @@ public class newListSelectionScript : MonoBehaviour {
                 else
                 {
                     ClearList();
-                   navMeshList.Clear();
+                   
                 }
             }
         }
@@ -113,5 +109,6 @@ public class newListSelectionScript : MonoBehaviour {
         {
             navMeshList[i].gameObject.tag = "Player";
         }
+        navMeshList.Clear();
     }
 }

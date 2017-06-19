@@ -7,6 +7,8 @@ public class cameraScroll : MonoBehaviour {
     public int scrollDistance = 10;
     public float scrollSpeed = 5;
 
+    public int cameraHeight = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -39,6 +41,18 @@ public class cameraScroll : MonoBehaviour {
         if (mousePosY >= Screen.height - scrollDistance)
         {
             transform.Translate(transform.forward * scrollSpeed * Time.deltaTime);
+        }
+
+        if(Input.GetAxis("Mouse ScrollWheel")> 0 && cameraHeight <= 7)
+        {
+            cameraHeight++;
+            transform.Translate(0, 1, 0);
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && cameraHeight >= 0)
+        {
+            cameraHeight--;
+            transform.Translate(0, -1, 0);
         }
     }
 }
