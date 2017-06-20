@@ -8,6 +8,9 @@ public class minimapJumpCamera : MonoBehaviour {
     Vector3 viewPortPosiion;
     float mainCameraHeight;
 
+    public float cameraXOffset;
+    public float cameraZOffset;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -30,6 +33,14 @@ public class minimapJumpCamera : MonoBehaviour {
                 Camera.main.transform.position = new Vector3(newCameraPosition.x, mainCameraHeight, newCameraPosition.z);
             }
 
+
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            newCameraPosition = GameObject.FindGameObjectWithTag("chosen").transform.position;
+            mainCameraHeight = Camera.main.transform.position.y;
+            Camera.main.transform.position = new Vector3(newCameraPosition.x, mainCameraHeight, newCameraPosition.z-cameraZOffset);
 
         }
 	}
