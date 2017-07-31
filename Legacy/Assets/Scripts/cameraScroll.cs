@@ -43,7 +43,7 @@ public class cameraScroll : MonoBehaviour {
             transform.Translate(transform.forward * scrollSpeed * Time.deltaTime);
         }
 
-        if(Input.GetAxis("Mouse ScrollWheel")< 0 && cameraHeight <= 7)
+        if(Input.GetAxis("Mouse ScrollWheel")< 0 && cameraHeight <= 10)
         {
             cameraHeight++;
             transform.Translate(0, 1, 0);

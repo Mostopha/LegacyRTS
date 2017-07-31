@@ -30,7 +30,7 @@ public class minimapJumpCamera : MonoBehaviour {
             {
                 newCameraPosition = hit.point;
                 mainCameraHeight = Camera.main.transform.position.y;
-                Camera.main.transform.position = new Vector3(newCameraPosition.x, mainCameraHeight, newCameraPosition.z);
+                Camera.main.transform.position = new Vector3(newCameraPosition.x, mainCameraHeight, newCameraPosition.z- cameraZOffset);
             }
 
 
