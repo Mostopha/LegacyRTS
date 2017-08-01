@@ -36,68 +36,75 @@ public class newListSelectionScript : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() == false)
             {
-                //navMeshAgent.SetDestination(hit.point);
 
-                /* for (int i = 0; i < navMeshArrays.Length; i++)
-                 {
-                     //navMeshArrays[i].SetDestination(hit.point);
-                     navMeshList[i].SetDestination(hit.point);
-                 }*/
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
 
-                for (int i = 0; i < navMeshList.Count; i++)
-               {
-                   navMeshList[i].SetDestination(hit.point);
-               }
+                if (Physics.Raycast(ray, out hit))
+                {
+                    //navMeshAgent.SetDestination(hit.point);
+
+                    /* for (int i = 0; i < navMeshArrays.Length; i++)
+                     {
+                         //navMeshArrays[i].SetDestination(hit.point);
+                         navMeshList[i].SetDestination(hit.point);
+                     }*/
+
+                    for (int i = 0; i < navMeshList.Count; i++)
+                    {
+                        navMeshList[i].SetDestination(hit.point);
+                    }
+                }
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
 
-            //previousUnit.tag = "Player";
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject() == false)
             {
-            
-                if (hit.collider.tag == "Player")
+                //previousUnit.tag = "Player";
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
                 {
-                    if (Input.GetKey(KeyCode.LeftShift))
+
+                    if (hit.collider.tag == "Player")
                     {
+                        if (Input.GetKey(KeyCode.LeftShift))
+                        {
+
+                        }
+                        else
+                        {
+                            if (previousUnit != null)
+                            {
+                                // previousUnit.tag = "Player";
+
+                                ClearList();
+                            }
+                        }
+
+                        hit.collider.tag = "chosen";
+                        navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
+
+                        // navMeshArrays[0] = hit.collider.GetComponent<NavMeshAgent>();
+
+                        navMeshList.Add(navMeshAgent);
+
+                        previousUnit = hit.collider;
+                        Debug.Log(previousUnit.name);
+
 
                     }
                     else
                     {
-                        if (previousUnit != null)
-                        {
-                            // previousUnit.tag = "Player";
+                        ClearList();
 
-                            ClearList();
-                        }
                     }
-
-                    hit.collider.tag = "chosen";
-                    navMeshAgent = hit.collider.GetComponent<NavMeshAgent>();
-
-                    // navMeshArrays[0] = hit.collider.GetComponent<NavMeshAgent>();
-
-                    navMeshList.Add(navMeshAgent);
-
-                    previousUnit = hit.collider;
-                    Debug.Log(previousUnit.name);
-
-
-                }
-                else
-                {
-                    ClearList();
-                   
                 }
             }
         }

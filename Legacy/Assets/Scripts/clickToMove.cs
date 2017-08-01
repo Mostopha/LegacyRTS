@@ -9,6 +9,8 @@ public class clickToMove : MonoBehaviour {
     public NavMeshAgent navMeshAgent;
     private Collider previousUnit;
 
+    private bool UIHoverState;
+
     public NavMeshAgent[] navMeshArrays;
 
     // Use this for initialization
@@ -19,10 +21,16 @@ public class clickToMove : MonoBehaviour {
         //navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent = null;
 
+       UIHoverState = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        //Debug.Log(UIHoverState);
+
+        Debug.Log("The mouse is hovering");
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -37,10 +45,14 @@ public class clickToMove : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+           
+            
 
             //previousUnit.tag = "Player";
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+
+            
 
             if(Physics.Raycast(ray, out hit))
             {
